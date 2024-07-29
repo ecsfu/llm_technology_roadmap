@@ -18,17 +18,35 @@ Hoffmann等人 (2022) 的扩展法则的目标是确定如何在特定的训练�
 
 ### Tokenizer
 ### 模型架构
+![img_1.png](images/img_1.png)
+
+![img.png](images/img2.png)【1】
+- Pre-normalization( RMSNorm)
+- SwiGLU
+- Rotary Embeddings
 
 ### 训练设置
+优化器：AdamW
+- β1 =0.9,β2 =0.95
+- cosine learning rate schedule，衰减至最大值的10%
+- weight decay 0.1
+- gradient clipping 1
+- warmup steps 2,000
 #### 预训练数据
+
+训练数据来自多个开源数据集，字节对编码 (BPE) 算法对数据进行分词，使用SentencePiece的实现。
 ![img.png](images/img.png)
+
 数据、超参
 
 ### 三阶段训练
 #### 预训练
+![img.png](images/img3.png)
 #### SFT
 #### 对齐
 
+### 参考
+【1】https://github.com/hkproj/pytorch-llama-notes
 
 
 
