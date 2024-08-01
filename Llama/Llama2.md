@@ -1,15 +1,21 @@
 ## llama1
-### 先导篇
+llama1 是一个预训练模型，对标GPT3.
+### 扩展法则
 llama1 的作者提及了一个扩展法则的概念
 
 [Chinchilla scaling laws](https://arxiv.org/pdf/2203.15556)
-### Tokenizer
+
 
 
 要点：
 - 缩放法则：最优的令牌与参数比率约为2500亿令牌每10亿参数。
 - 性能：在更多数据上训练的小型模型可以与在较少数据上训练的大型模型表现出相当的性能。
 - 推理效率：小型模型在推理过程中可以更高效，这对于实际应用非常重要。
+### Tokenizer
+- BPE 算法，SentencePiece实现
+- 所有的数字会被拆分成单个数字
+- 无法正确解析的 UTF-8 编码字符会转成字节序列
+- FFN中间维度：8/3d
 ### 模型架构
 ![img_1.png](images/img_1.png)
 
@@ -27,17 +33,24 @@ llama1 的作者提及了一个扩展法则的概念
 - warmup steps 2,000
 #### 预训练数据
 
-训练数据来自多个开源数据集，字节对编码 (BPE) 算法对数据进行分词，使用SentencePiece的实现。
+训练数据来自多个开源数据集。
 ![img.png](images/img.png)
 
-数据、超参
 
-### 三阶段训练
 #### 预训练
-![img.png](images/img3.png)
-#### SFT
-#### 对齐
+![img.png](images/loss.png)
+- LLaMA-33B、LLaMA-65B：1.4T token
+- LLaMA-7B、LLaMA-13B：1T token
+- batch size： 4M tokens
+- 65B 参数模型在2048个A100(80G)上训练1.4T token大约需要 21 天
 
+### 高效实现
+- 减少了在反向传播过程中需要重新计算的激活的数量
+- 模型并行性和序列并行
+- 重叠激活的计算与GPU之间的网络通信
+
+ 
+ 
 
 ## llama2
 对标GPT-3
