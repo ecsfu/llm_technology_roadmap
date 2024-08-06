@@ -1,4 +1,4 @@
-## llama1
+# llama1
 llama1 是一个预训练模型，对标GPT3.
 ### 扩展法则
 llama1 的作者提及了一个扩展法则的概念
@@ -52,7 +52,7 @@ llama1 的作者提及了一个扩展法则的概念
  
  
 
-## llama2
+# llama2
 Hoffmann等人 (2022) 的扩展法则的目标是确定如何在特定的训练计算预算下最佳地扩展数据集和模型的规模。
 给定一个性能目标水平，理想的模型不是训练速度最快的，而是推理速度最快的。
 例如，尽管Hoffmann等人 (2022) 建议在2000亿个令牌上训练100亿参数的模型，我们发现70亿参数的模型即使在1万亿个令牌之后性能仍然在持续提高。
@@ -75,8 +75,8 @@ Hoffmann等人 (2022) 的扩展法则的目标是确定如何在特定的训练�
 - gradient clipping 1
 - warmup steps 2,000
 #### 预训练
-
-训练2Ttokens后模型仍然没有饱和。
+- a global batch-size of 4M tokens
+- 训练2Ttokens后模型仍然没有饱和。
 ![img.png](images/ll2Pret.png)
 
 ### post阶段训练
@@ -108,6 +108,30 @@ Hoffmann等人 (2022) 的扩展法则的目标是确定如何在特定的训练�
 ##### Iterative Fine-Tuning
 算法:PPO和拒绝采样
 
+# llama3
+
+-sequences of 8,192 tokens
+- using a mask to ensure self-attention does not cross document boundaries.
+### Tokenizer
+- 词表从32k升级为128k,更大的词表，更少的token
+- SentencePiece 换为 Tiktoken
+### 模型架构
+### 训练设置
+#### 预训练
+- 15T token
+### post阶段训练
+- SFT
+- 拒绝采样，DPO，PPO(LLAMA3)
+
+# llama3.1
+![img.png](images/LLAMA3_SERIES.png)
+![img.png](images/3.1hp.png)
+-attention mask that prevents self-attention between diﬀerent documents within the same
+sequence.
+-支持工具调用(搜索引擎、python 解释器、数学计算)和多模态(暂未推出)
+### post阶段训练
+- SFT
+- 拒绝采样，DPO，DPO
 ### 参考
 【1】https://github.com/hkproj/pytorch-llama-notes
 
