@@ -82,7 +82,7 @@
 - 训练步数为 50,000 
 
 
-#Qwen2
+# Qwen2
 ![img.png](images/qwen2.png)
 ### Tokenizer
  - 同qwen
