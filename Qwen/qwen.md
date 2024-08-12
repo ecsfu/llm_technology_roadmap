@@ -1,4 +1,4 @@
-#Qwen
+# Qwen
 千问系列模型，包含预训练模型、代码(SFT)、数学(SFT)、视觉语言模型（SFT）对话模型（RLHF）和奖励模型
 ![img.png](images/qwen.png)\
 
