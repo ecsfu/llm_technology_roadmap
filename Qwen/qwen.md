@@ -16,7 +16,7 @@
  - BPE,tiktoken实现
  - 词表：cl100k base + 中文及其他语言增强，数字被拆分为单个数字，最后词表大小约152k
 ### 模型架构
- ![img.png](qwenmodel.png)
+ ![img.png](images/qwenmodel.png)
 基于Llama,修改点包括：
 - 非绑定（untied）嵌入
 - RoPE，用FP32 精度用于逆频率矩阵
@@ -49,7 +49,7 @@
 #### reward model
  - 使用与 QWEN 相同规模的预训练语言模型作为基础。
  - 在模型中加入一个池化层用于从特定的结束标记提取句子的奖励值。
- - 设置学习率为 3 × 10^−6，批次大小为 64，序列长度为 2048。
+ - 设置学习率为 3 × 10e−6，批次大小为 64，序列长度为 2048。
  - 训练过程持续一个周期。
 #### ppo
  - 策略模型和价值模型的学习率分别设置为 1 × 10^−6 和 5 × 10^−6
@@ -83,3 +83,15 @@
 
 
 #Qwen2
+![img.png](images/qwen2.png)
+### Tokenizer
+ - 同qwen
+ - 所有模型都使用一个共同的词汇表，其中包括151,643个常规tokens和3个控制tokens。
+### 模型架构
+- 双块注意力机制(Dual Chunk Attention, DCA)
+- YARN,重新缩放注意力权重
+#### MOE
+![img.png](images/moe.png)
+- 粒度：细粒度专家（Dai等人, 2024），创建了更小规模的专家，同时激活更多的专家
+- 路由：MoE层中整合共享专家和特定路由的专家（Rajbhandari等人, 2022; Dai等人, 2024）
+- 初始化：upcycling（Komatsuzaki等人, 2023）的方式初始化专家
