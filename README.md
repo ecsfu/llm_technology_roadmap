@@ -1,6 +1,6 @@
 # llm_technology_roadmap
 
-# [llama](Llama/Llama.md)
+# [Llama](Llama/Llama.md)
 
 
-#[qwen](Qwen/qwen.md)
+# [Qwen](Qwen/qwen.md)
